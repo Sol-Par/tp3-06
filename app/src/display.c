@@ -102,6 +102,7 @@ static bool initial8BitCommunicationIsCompleted;
 static void displayPinWrite( uint8_t pinName, int value );
 static void displayDataBusWrite( uint8_t dataByte );
 static void displayCodeWrite( bool type, uint8_t dataBus );
+void displayClean(uint8_t line);
 
 /********************** internal data definition *****************************/
 /********************** external data declaration ****************************/
@@ -357,6 +358,13 @@ static void displayDataBusWrite( uint8_t dataBus )
     HAL_Delay(1);
     displayPinWrite( DISPLAY_PIN_EN, OFF );
     HAL_Delay(1);
+}
+
+void displayClean(uint8_t line){
+	for(uint32_t i = 0; i < 20; i++){
+		displayCharPositionWrite(i,line);
+		displayStringWrite(" ");
+	}
 }
 /********************** end of file ******************************************/
 

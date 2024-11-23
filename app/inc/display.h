@@ -30,4 +30,6 @@ void displayCharPositionWrite( uint8_t charPositionX, uint8_t charPositionY );
 
 void displayStringWrite( const char * str );
 
+void displayClean(uint8_t line);
+
 #endif /* INC_DISPLAY_H_ */
