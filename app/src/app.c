@@ -126,6 +126,7 @@ void app_update(void)
 	uint32_t cycle_counter_time_us;
 
 	/* Check if it's time to run tasks */
+	LOGGER_LOG("%ld\n", g_app_tick_cnt);
 	if (G_APP_TICK_CNT_INI < g_app_tick_cnt)
     {
     	g_app_tick_cnt--;

@@ -214,20 +214,18 @@ void task_menu_update(void *parameters)
 						displayClean(2);
 						displayCharPositionWrite(0,2);
 						displayStringWrite(">");
+						displayCharPositionWrite(0, 0);
+						displayStringWrite("--Enter/Next/Escape-");
+						displayCharPositionWrite(1, 2);
+						displayStringWrite("Motor 1");
+						displayCharPositionWrite(11, 2);
+						displayStringWrite("Motor 2");
 					}
 
 
 					break;
 
 				case ST_MEN_XX_MENU1:
-
-					displayCharPositionWrite(0, 0);
-					displayStringWrite("--Enter/Next/Escape-");
-					displayCharPositionWrite(1, 2);
-					displayStringWrite("Motor 1");
-					displayCharPositionWrite(11, 2);
-					displayStringWrite("Motor 2");
-
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESC_ACTIVE == p_task_menu_dta->event))
 					{
@@ -259,19 +257,18 @@ void task_menu_update(void *parameters)
 						displayClean(2);
 						displayCharPositionWrite(0,2);
 						displayStringWrite(">");
+						displayCharPositionWrite(1, 2);
+						displayStringWrite("Power");
+						displayCharPositionWrite(8, 2);
+						displayStringWrite("Speed");
+						displayCharPositionWrite(15, 2);
+						displayStringWrite("Spin");
 					}
 
 
 					break;
 
 				case ST_MEN_XX_MENU2:
-
-					displayCharPositionWrite(1, 2);
-					displayStringWrite("Power");
-					displayCharPositionWrite(8, 2);
-					displayStringWrite("Speed");
-					displayCharPositionWrite(15, 2);
-					displayStringWrite("Spin");
 
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESC_ACTIVE == p_task_menu_dta->event))
@@ -283,6 +280,12 @@ void task_menu_update(void *parameters)
 						displayClean(2);
 						displayCharPositionWrite(0,2);
 						displayStringWrite(">");
+						displayCharPositionWrite(0, 0);
+						displayStringWrite("--Enter/Next/Escape-");
+						displayCharPositionWrite(1, 2);
+						displayStringWrite("Motor 1");
+						displayCharPositionWrite(11, 2);
+						displayStringWrite("Motor 2");
 					}
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_NEX_ACTIVE == p_task_menu_dta->event))
@@ -316,14 +319,35 @@ void task_menu_update(void *parameters)
 
 						case 0:
 							p_task_menu_dta->state = ST_MEN_XX_MENU3_POWER;
+							displayCharPositionWrite(1, 2);
+							displayStringWrite("ON");
+							displayCharPositionWrite(11, 2);
+							displayStringWrite("OFF");
 							break;
 
 						case 1:
 							p_task_menu_dta->state = ST_MEN_XX_MENU3_SPEED;
+							for(uint32_t i = 0; i < 10; i++){
+								if(i < 5)
+									displayCharPositionWrite(((i*3)+1),2);
+								else
+									displayCharPositionWrite((((i-5)*3)+1),3);
+
+								char c = i + '0';
+								char buffer[2];
+								buffer[0] = c;
+								buffer[1] = '\0';
+								displayStringWrite(buffer);
+							}
 							break;
 
 						case 2:
 							p_task_menu_dta->state = ST_MEN_XX_MENU3_SPIN;
+							displayCharPositionWrite(1, 2);
+							displayStringWrite("LEFT");
+							displayCharPositionWrite(11, 2);
+							displayStringWrite("RIGHT");
+
 							break;
 
 						default:
@@ -331,14 +355,6 @@ void task_menu_update(void *parameters)
 					}
 
 				case ST_MEN_XX_MENU3_POWER:
-
-					if(p_task_menu_dta->state == ST_MEN_XX_MENU3_POWER){
-						displayCharPositionWrite(1, 2);
-						displayStringWrite("ON");
-						displayCharPositionWrite(11, 2);
-						displayStringWrite("OFF");
-					}
-
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESC_ACTIVE == p_task_menu_dta->event))
 					{
@@ -350,6 +366,12 @@ void task_menu_update(void *parameters)
 						displayClean(2);
 						displayCharPositionWrite(0,2);
 						displayStringWrite(">");
+						displayCharPositionWrite(1, 2);
+						displayStringWrite("Power");
+						displayCharPositionWrite(8, 2);
+						displayStringWrite("Speed");
+						displayCharPositionWrite(15, 2);
+						displayStringWrite("Spin");
 					}
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_NEX_ACTIVE == p_task_menu_dta->event))
@@ -379,6 +401,12 @@ void task_menu_update(void *parameters)
 						displayClean(2);
 						displayCharPositionWrite(0,2);
 						displayStringWrite(">");
+						displayCharPositionWrite(1, 2);
+						displayStringWrite("Power");
+						displayCharPositionWrite(8, 2);
+						displayStringWrite("Speed");
+						displayCharPositionWrite(15, 2);
+						displayStringWrite("Spin");
 					}
 
 
@@ -386,20 +414,6 @@ void task_menu_update(void *parameters)
 					break;
 
 				case ST_MEN_XX_MENU3_SPEED:
-
-					for(uint32_t i = 0; i < 10; i++){
-						if(i < 5)
-							displayCharPositionWrite(((i*3)+1),2);
-						else
-							displayCharPositionWrite((((i-5)*3)+1),3);
-
-						char c = i + '0';
-						char buffer[2]; // Cadena de 2 caracteres: uno para el carácter y otro para '\0'
-						buffer[0] = c;
-						buffer[1] = '\0'; // Fin de cadena
-						displayStringWrite(buffer); // Escribe la cadena
-					}
-
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESC_ACTIVE == p_task_menu_dta->event))
 					{
@@ -411,6 +425,12 @@ void task_menu_update(void *parameters)
 						displayClean(2);
 						displayCharPositionWrite(0,2);
 						displayStringWrite(">");
+						displayCharPositionWrite(1, 2);
+						displayStringWrite("Power");
+						displayCharPositionWrite(8, 2);
+						displayStringWrite("Speed");
+						displayCharPositionWrite(15, 2);
+						displayStringWrite("Spin");
 					}
 
 
@@ -458,16 +478,17 @@ void task_menu_update(void *parameters)
 						displayClean(3);
 						displayCharPositionWrite(0,2);
 						displayStringWrite(">");
+						displayCharPositionWrite(1, 2);
+						displayStringWrite("Power");
+						displayCharPositionWrite(8, 2);
+						displayStringWrite("Speed");
+						displayCharPositionWrite(15, 2);
+						displayStringWrite("Spin");
 					}
 
 					break;
 
 				case ST_MEN_XX_MENU3_SPIN:
-
-					displayCharPositionWrite(1, 2);
-					displayStringWrite("LEFT");
-					displayCharPositionWrite(11, 2);
-					displayStringWrite("RIGHT");
 
 					if ((true == p_task_menu_dta->flag) && (EV_MEN_ESC_ACTIVE == p_task_menu_dta->event))
 					{
@@ -479,7 +500,12 @@ void task_menu_update(void *parameters)
 						displayClean(2);
 						displayCharPositionWrite(0,2);
 						displayStringWrite(">");
-
+						displayCharPositionWrite(1, 2);
+						displayStringWrite("Power");
+						displayCharPositionWrite(8, 2);
+						displayStringWrite("Speed");
+						displayCharPositionWrite(15, 2);
+						displayStringWrite("Spin");
 					}
 
 
@@ -510,6 +536,12 @@ void task_menu_update(void *parameters)
 						displayClean(2);
 						displayCharPositionWrite(0,2);
 						displayStringWrite(">");
+						displayCharPositionWrite(1, 2);
+						displayStringWrite("Power");
+						displayCharPositionWrite(8, 2);
+						displayStringWrite("Speed");
+						displayCharPositionWrite(15, 2);
+						displayStringWrite("Spin");
 					}
 					break;
 
